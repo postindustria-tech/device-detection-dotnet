@@ -33,7 +33,7 @@ elseif ($IsWindows) {
 }
 elseif ($IsMacOS) {
     $Subfolder = "macos"
-    $Archs = @("x64")
+    $Archs = @("x64", "ARM64")
     foreach($a in $Archs){
         $ExtraArgs = ""
         if ($a -eq "ARM64") {
