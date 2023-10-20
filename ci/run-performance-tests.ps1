@@ -9,4 +9,9 @@ param(
 )
 
 . ./$RepoName/ci/run-performance-tests-console.ps1 -RepoName $RepoName -OrgName $OrgName -Name $Name -Configuration $Configuration -Arch $Arch
+
+Write-Output ""
+Write-Output "===== CONSOLE / WEB DELIMITER ====="
+Write-Output ""
+
 . ./$RepoName/ci/run-performance-tests-web.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch
