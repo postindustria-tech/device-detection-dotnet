@@ -5,6 +5,9 @@ include(ExternalProject)
 
 set(EXTERNAL_INSTALL_LOCATION ${CMAKE_BINARY_DIR}/external)
 
+# workaround, see https://github.com/actions/runner-images/issues/8598
+$env:PATH = $env:PATH -replace "C:\\Strawberry\\c\\bin;"
+
 ExternalProject_Add(ApacheBench
     GIT_REPOSITORY https://github.com/51degrees/apachebench
     CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=${EXTERNAL_INSTALL_LOCATION}
