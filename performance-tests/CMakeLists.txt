@@ -29,9 +29,7 @@ download_file(
 )
 
 add_custom_target(perf ALL
-    COMMAND powershell Get-ChildItem ${CMAKE_SOURCE_DIR}
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/runPerf.ps1 ./
-    COMMAND powershell Get-ChildItem .
     DEPENDS ${CMAKE_SOURCE_DIR}/runPerf.ps1
 
     VERBATIM
