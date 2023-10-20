@@ -69,6 +69,8 @@ try {
         Write-Output "Building service"
         dotnet build "$PerfPath" -c $Configuration /p:Platform=$Arch
 
+        Get-ChildItem
+
         # When running the performance tests, set the data file name manually,
         # then unset once we're done
         Write-Output "Running performance test"
