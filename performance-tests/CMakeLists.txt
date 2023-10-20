@@ -31,11 +31,19 @@ download_file(
     ./uas.csv
 )
 
+execute_process(
+    COMMAND pwsh Get-ChildItem ${CMAKE_SOURCE_DIR}
+    )
+
 add_custom_target(perf ALL
     COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/runPerf.ps1 ./
     DEPENDS ${CMAKE_SOURCE_DIR}/runPerf.ps1
 
     VERBATIM
 )
+
+execute_process(
+    COMMAND pwsh Get-ChildItem
+    )
 
 add_dependencies(perf ApacheBench-build)
