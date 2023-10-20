@@ -85,19 +85,6 @@ try {
             Copy-Item -Path $_.FullName -Destination $destinationPath -Force -ErrorAction SilentlyContinue
             Write-Host "Copied $($_.Name) to $destinationPath"
         }
-
-
-        # Write out the results for comparison
-        Write-Output "Writing performance test results"
-        $Results = Get-Content ./summary.json | ConvertFrom-Json
-        Write-Output "{
-            'HigherIsBetter': {
-                'DetectionsPerSecond': $(1/($Results.overhead_ms / 1000))
-            },
-            'LowerIsBetter': {
-                'MsPerDetection': $($Results.overhead_ms)
-            }
-        }" > $PerfResultsFile
     }
     finally {
 
