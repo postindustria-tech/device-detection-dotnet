@@ -29,7 +29,7 @@ download_file(
 )
 
 execute_process(
-    COMMAND pwsh Get-ChildItem ${CMAKE_SOURCE_DIR}
+    COMMAND pwsh -Command Get-ChildItem ${CMAKE_SOURCE_DIR}
     )
 
 add_custom_target(perf ALL
@@ -40,7 +40,7 @@ add_custom_target(perf ALL
 )
 
 execute_process(
-    COMMAND pwsh Get-ChildItem
+    COMMAND pwsh -Command Get-ChildItem
     )
 
 add_dependencies(perf ApacheBench-build)
