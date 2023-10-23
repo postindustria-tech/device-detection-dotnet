@@ -42,6 +42,8 @@ try {
         ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
     }
 
+    Get-ChildItem $EvidenceFiles
+
     Write-Output "Moving TAC file"
     $TacFile = [IO.Path]::Combine($EvidenceFiles, "TAC-HashV41.hash") 
     Copy-Item $TacFile device-detection-dotnet-examples/device-detection-data/TAC-HashV41.hash
