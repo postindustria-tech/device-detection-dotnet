@@ -43,6 +43,7 @@ try {
     }
 
     Write-Output "EvidenceFiles = '$EvidenceFiles'"
+    Get-ChildItem -Recurse $RepoPath
     Get-ChildItem $EvidenceFiles
 
     Write-Output "Moving TAC file"
