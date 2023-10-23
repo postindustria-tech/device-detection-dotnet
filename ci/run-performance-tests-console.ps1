@@ -42,6 +42,7 @@ try {
         ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
     }
 
+    Write-Output "EvidenceFiles = '$EvidenceFiles'"
     Get-ChildItem $EvidenceFiles
 
     Write-Output "Moving TAC file"
