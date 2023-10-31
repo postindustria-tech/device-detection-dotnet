@@ -68,16 +68,22 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Write-Output "Entering '$ExamplesProject'"
         Push-Location $ExamplesProject
 
+        Write-Output ""
+        Write-Output "Listing csproj files to update..."
+        Get-ChildItem -Path $ExamplesProject -Recurse -File -Filter "*.csproj" -Name
+        Write-Output ""
+
         # Change the dependency version to the locally build Nuget package
         Write-Output "Setting the version of the DeviceDetection package to '$Version'..."
-        Get-ChildItem -Path $ExamplesProject -Recurse -File | ForEach-Object {
-            $NextName = $_.Name
-            if ($NextName -like "*.csproj") {
-                $NextFullName = $_.FullName
-                Write-Output "Setting the version of the DeviceDetection package to '$Version' in $NextFullName..."
-                dotnet add $NextFullName package "FiftyOne.DeviceDetection" --version $Version --source "$LocalFeed" 
-            }
+        Get-ChildItem -Path $ExamplesProject -Recurse -File -Filter "*.csproj" | ForEach-Object {
+            $NextFullName = $_.FullName
+            Write-Output ""
+            Write-Output "Will set the version of the DeviceDetection package to '$Version' in $NextFullName..."
+            dotnet add $NextFullName package "FiftyOne.DeviceDetection" --version $Version --source "$LocalFeed" 
+            Write-Output "Did set the version of the DeviceDetection package to '$Version' in $NextFullName..."
+            Write-Output ""
         }
+        Write-Output ""
     }
     finally{
         Write-Output "Leaving '$ExamplesProject'"
