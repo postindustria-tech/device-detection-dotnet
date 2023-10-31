@@ -79,10 +79,7 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Pop-Location
     }
     
-    # Build and Test Examples project now that all is set up
-    Write-Output "Building project with following configuration '$Configuration|$Arch|$BuildMethod'"
-    ./device-detection-dotnet-examples/ci/build-project.ps1 -RepoName $ExamplesRepoName -Name $Name -Configuration $Configuration -Arch $Arch -BuildMethod $BuildMethod
-    
+    # Test Examples project now that all is set up
     Write-Output "Testing Examples Project"
     ./dotnet/run-integration-tests.ps1 -RepoName $ExamplesRepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch -BuildMethod "dotnet" -DirNameFormatForDotnet "*" -DirNameFormatForNotDotnet "*" -Filter ".*\.sln"
     
