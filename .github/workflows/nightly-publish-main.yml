@@ -9,7 +9,7 @@ on:
 jobs:
   # Run the common workflow to test and publish the main branch
   Nightly_Publish_Main:
-    uses: postindustria-tech/common-ci/.github/workflows/nightly-publish-main.yml@add-common-ci-ref-input
+    uses: 51Degrees/common-ci/.github/workflows/nightly-publish-main.yml@add-common-ci-ref-input
     with:
       repo-name: ${{ github.event.repository.name }}
       org-name: ${{ github.event.repository.owner.login }}
