@@ -65,17 +65,17 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
     
     # Update the dependency in the examples project to point to the newly bulit package
     try{
-        Write-Output "Entering '$ExamplesProject'"
-        Push-Location $ExamplesProject
+        Write-Output "Entering '$ExamplesRepoPath'"
+        Push-Location $ExamplesRepoPath
 
         Write-Output ""
         Write-Output "Listing csproj files to update..."
-        Get-ChildItem -Path $ExamplesProject -Recurse -File -Filter "*.csproj" -Name
+        Get-ChildItem -Path $ExamplesRepoPath -Recurse -File -Filter "*.csproj" -Name
         Write-Output ""
 
         # Change the dependency version to the locally build Nuget package
         Write-Output "Setting the version of the DeviceDetection package to '$Version'..."
-        Get-ChildItem -Path $ExamplesProject -Recurse -File -Filter "*.csproj" | ForEach-Object {
+        Get-ChildItem -Path $ExamplesRepoPath -Recurse -File -Filter "*.csproj" | ForEach-Object {
             $NextFullName = $_.FullName
             Write-Output ""
             Write-Output "Will set the version of the DeviceDetection package to '$Version' in $NextFullName..."
@@ -86,7 +86,7 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Write-Output ""
     }
     finally{
-        Write-Output "Leaving '$ExamplesProject'"
+        Write-Output "Leaving '$ExamplesRepoPath'"
         Pop-Location
     }
     
