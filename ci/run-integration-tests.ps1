@@ -10,6 +10,8 @@ param(
     [string]$OrgName
 )
 
+Set-PSDebug -Trace 2
+
 $NugetPackageFolder = [IO.Path]::Combine($pwd, "package")
 $EvidenceFiles = [IO.Path]::Combine($pwd, $RepoName,"FiftyOne.DeviceDetection.Hash.Engine.OnPremise", "device-detection-cxx", "device-detection-data")
 $ExamplesRepoName = "device-detection-dotnet-examples"
