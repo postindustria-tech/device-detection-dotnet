@@ -81,7 +81,7 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
     Write-Output "Testing Examples Project"
     ./dotnet/run-integration-tests.ps1 -RepoName $ExamplesRepoName -ProjectDir $ProjectDir -Name $Name -Configuration $Configuration -Arch $Arch -BuildMethod "dotnet" -DirNameFormatForDotnet "*" -DirNameFormatForNotDotnet "*" -Filter ".*\.sln"
     
-    Get-ChildItem -Recurse .
+    Get-ChildItem -Recurse -Name .
 
     Copy-Item $ExamplesRepoName/test-results $RepoName -Recurse
 } 
