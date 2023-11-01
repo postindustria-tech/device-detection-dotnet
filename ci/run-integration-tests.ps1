@@ -11,26 +11,25 @@ param(
 )
 
 $NugetPackageFolder = [IO.Path]::Combine($pwd, "package")
-$EvidenceFiles = [IO.Path]::Combine($pwd, $RepoName,"FiftyOne.DeviceDetection.Hash.Engine.OnPremise", "device-detection-cxx", "device-detection-data")
+$EvidenceFilesSrc = [IO.Path]::Combine($pwd, $RepoName,"FiftyOne.DeviceDetection.Hash.Engine.OnPremise", "device-detection-cxx", "device-detection-data")
 $ExamplesRepoName = "device-detection-dotnet-examples"
 $ExamplesRepoPath = [IO.Path]::Combine($pwd, $ExamplesRepoName)
+$EvidenceFilesDst = [IO.Path]::Combine($ExamplesRepoPath, "device-detection-data")
 
 # If the $Version is empty it means that this script is running in a workflow that will not build packages and integration tests will be skipped.
 if([String]::IsNullOrEmpty($Version) -eq $False) { 
     Write-Output "Cloning '$ExamplesRepoName'"
     ./steps/clone-repo.ps1 -RepoName $ExamplesRepoName -OrgName $OrgName
-    
-    Write-Output "Moving TAC file for examples"
-    $TacFile = [IO.Path]::Combine($EvidenceFiles, "TAC-HashV41.hash") 
-    Copy-Item $TacFile device-detection-dotnet-examples/device-detection-data/TAC-HashV41.hash
 
-    Write-Output "Moving evidence files for examples"
-    $UAFile = [IO.Path]::Combine($EvidenceFiles, "20000 User Agents.csv") 
-    $EvidenceFile = [IO.Path]::Combine($EvidenceFiles, "20000 Evidence Records.yml")
-    Copy-Item $UAFile "device-detection-dotnet-examples/device-detection-data/20000 User Agents.csv"
-    Copy-Item $EvidenceFile "device-detection-dotnet-examples/device-detection-data/20000 Evidence Records.yml"
-    
-    $ExamplesProject = [IO.Path]::Combine($ExamplesRepoPath, "Examples", "ExampleBase")
+    Write-Output "Moving TAC and evidence files for examples..."
+    $EvidenceFileNames = "20000 User Agents.csv", "20000 Evidence Records.yml", "51Degrees-LiteV4.1.hash", "TAC-HashV41.hash"
+    foreach ($NextEvidenceFile in $EvidenceFileNames)
+    {
+        Write-Output "  - Copying $NextEvidenceFile..."
+        $NextEvidenceFileSrc = [IO.Path]::Combine($EvidenceFilesSrc, $NextEvidenceFile)
+        $NextEvidenceFileDst = [IO.Path]::Combine($EvidenceFilesDst, $NextEvidenceFile)
+        Copy-Item $NextEvidenceFileSrc $NextEvidenceFileDst
+    }
     
     # Restore nuget packages in the examples project
     try {
