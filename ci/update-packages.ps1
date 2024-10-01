@@ -6,7 +6,7 @@ param(
     [string]$RepoName
 )
 try {
-    ./dotnet/run-update-dependencies.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name
+    ./dotnet/run-update-dependencies.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name -Debug
 }
 catch {
     Write-Output "An error occurred:"
