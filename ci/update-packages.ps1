@@ -5,7 +5,16 @@ param(
     [Parameter(Mandatory=$true)]
     [string]$RepoName
 )
-
-./dotnet/run-update-dependencies.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name
+try {
+    ./dotnet/run-update-dependencies.ps1 -RepoName $RepoName -ProjectDir $ProjectDir -Name $Name
+}
+catch {
+    Write-Output "An error occurred:"
+    Write-Output $_
+    Write-Output "========= ========= ========="
+}
+finally {
+    Write-Output "LASTEXITCODE = $LASTEXITCODE"
+}
 
 exit $LASTEXITCODE
