@@ -11,9 +11,10 @@ try {
 catch {
     Write-Output "An error occurred:"
     Write-Output $_
-    Write-Output "========= ========= ========="
 }
 finally {
+    Write-Output "░░░░░░░░░ ░░░░░░░░░ ░░░░░░░░░ ░░░░░░░░░ ░░░░░░░░░"
+    Write-Output "In [update-packages.ps1]:"
     Write-Output "LASTEXITCODE = $LASTEXITCODE"
 }
 
