@@ -517,10 +517,6 @@ namespace FiftyOne.DeviceDetection
 		/// </summary>
 		IAspectPropertyValue<bool> InVRMode { get; }
 		/// <summary>
-		/// Indicates whether the crawler is confirmed by the crawler controller to be used to train artificial intelligence.
-		/// </summary>
-		IAspectPropertyValue<string> IsArtificialIntelligence { get; }
-		/// <summary>
 		/// Indicates if the device is primarily a game console, such as an Xbox or Playstation.
 		/// </summary>
 		IAspectPropertyValue<bool> IsConsole { get; }
@@ -1056,14 +1052,6 @@ namespace FiftyOne.DeviceDetection
 		/// Indicates the list of wireless data technologies supported by the device, including Bluetooth and Wi-Fi. For example, 4G cellular network technologies includes 'LTE' (Long Term Evolution), and 5G technologies includes 'NR' (New Radio). If the device supports phone calls, the SMS value is also returned.
 		/// </summary>
 		IAspectPropertyValue<IReadOnlyList<string>> SupportedBearers { get; }
-		/// <summary>
-		/// Indicates the highest version of Bluetooth the device supports.
-		/// </summary>
-		IAspectPropertyValue<double> SupportedBluetooth { get; }
-		/// <summary>
-		/// Indicates the Bluetooth profiles the device supports.
-		/// </summary>
-		IAspectPropertyValue<IReadOnlyList<string>> SupportedBluetoothProfiles { get; }
 		/// <summary>
 		/// Indicates the highest version of Bluetooth the device supports.
 		/// </summary>
