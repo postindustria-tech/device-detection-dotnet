@@ -21,7 +21,9 @@ Move-Item $DataFileSource $DataFileDestination
 Push-Location $DataFileDir
 try {
     Write-Output "Pulling evidence files and a lite data file"
-    git lfs pull || True
+    & git lfs pull > $null
+} catch {
+    
 } finally {
     Pop-Location
 }
