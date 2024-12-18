@@ -23,6 +23,9 @@ try {
     Write-Output "Pulling evidence files"
     git lfs pull
 }
+catch {
+
+} 
 finally {
     Pop-Location
 }
