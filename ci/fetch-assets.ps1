@@ -22,10 +22,8 @@ Push-Location $DataFileDir
 try {
     Write-Output "Pulling evidence files"
     git lfs pull
-}
-catch {
-
-} 
-finally {
+} catch {
+    Write-Output "Failed to pull, passing"
+} finally {
     Pop-Location
 }
