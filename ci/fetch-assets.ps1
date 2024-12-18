@@ -20,7 +20,7 @@ Move-Item $DataFileSource $DataFileDestination
 # But are not pulled by default.
 Push-Location $DataFileDir
 try {
-    Write-Output "Pulling evidence files"
+    Write-Output "Pulling evidence files and a lite data file"
     git lfs pull
 } catch {
     Write-Output "Failed to pull, passing"
