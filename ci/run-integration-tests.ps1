@@ -37,7 +37,6 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Push-Location $ExamplesRepoPath
 
         Write-Output "Running Nuget Restore"
-        nuget restore
     }
     finally {
 
@@ -55,7 +54,7 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Push-Location "$NugetPackageFolder"
         
         Write-Output "Pushing nuget packages to the local feed"
-        dotnet nuget locals --clear all
+
         dotnet nuget push "*.nupkg" -s "$LocalFeed"
     }
     finally{
@@ -82,8 +81,16 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
             dotnet add $NextFullName package "FiftyOne.DeviceDetection" --version $Version --source "$LocalFeed" 
             Write-Output "Did set the version of the DeviceDetection package to '$Version' in $NextFullName..."
             Write-Output ""
+
         }
         Write-Output ""
+        nuget restore
+        Get-ChildItem -Path $ExamplesRepoPath -Recurse -File -Filter "*.dll" | ForEach-Object {
+            $NextFullName = $_.FullName
+            Write-Output "Analyze DLL"
+            file $NextFullName
+            [System.Reflection.Assembly]::LoadFrom("$NextFullName").GetName()
+        }
     }
     finally{
         Write-Output "Leaving '$ExamplesRepoPath'"
