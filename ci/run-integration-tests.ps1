@@ -55,6 +55,7 @@ if([String]::IsNullOrEmpty($Version) -eq $False) {
         Push-Location "$NugetPackageFolder"
         
         Write-Output "Pushing nuget packages to the local feed"
+        dotnet nuget locals --clear all
         dotnet nuget push "*.nupkg" -s "$LocalFeed"
     }
     finally{
