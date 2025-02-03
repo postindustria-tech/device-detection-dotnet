@@ -250,8 +250,8 @@ namespace FiftyOne.DeviceDetection.Hash.Engine.OnPremise.Data
                     {
                         throw new Exception(
                             $"Expected property '{key}' to be of " +
-                            $"type '{typeof(T).Name}' but it is " +
-                            $"'{obj.GetType().Name}'");
+                            $"type '{GetPrettyTypeName(typeof(T))}' but it is " +
+                            $"'{GetPrettyTypeName(obj.GetType())}'");
                     }
                 }
             }

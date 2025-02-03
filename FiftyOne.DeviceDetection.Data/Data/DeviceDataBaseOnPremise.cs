@@ -30,6 +30,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Text;
 
 namespace FiftyOne.DeviceDetection.Shared.Data
 {
@@ -502,8 +503,8 @@ namespace FiftyOne.DeviceDetection.Shared.Data
                         {
                             throw new PipelineException(
                                 $"Expected property '{key}' to be of " +
-                                $"type '{typeof(T).Name}' but it is " +
-                                $"'{obj.GetType().Name}'");
+                                $"type '{GetPrettyTypeName(typeof(T))}' but it is " +
+                                $"'{GetPrettyTypeName(obj.GetType())}'");
                         }
                     }
                 }
@@ -512,5 +513,34 @@ namespace FiftyOne.DeviceDetection.Shared.Data
             return false;
         }
         #endregion
+
+        private static void AppendPrettyTypeName(Type type, StringBuilder typeNameBuilder)
+        {
+            if (!type.IsGenericType)
+            {
+                typeNameBuilder.Append(type.Name);
+                return;
+            }
+
+            var typeName = type.Name;
+            var genericTypeName = typeName.Substring(0, typeName.IndexOf('`'));
+            typeNameBuilder.Append(genericTypeName);
+            var genericArguments = type.GetGenericArguments();
+            typeNameBuilder.Append('<');
+            for (int i = 0; i < genericArguments.Length; i++)
+            {
+                if (i > 0)
+                    typeNameBuilder.Append(", ");
+                AppendPrettyTypeName(genericArguments[i], typeNameBuilder);
+            }
+            typeNameBuilder.Append('>');
+        }
+
+        protected static string GetPrettyTypeName(Type type)
+        {
+            var typeNameBuilder = new StringBuilder();
+            AppendPrettyTypeName(type, typeNameBuilder);
+            return typeNameBuilder.ToString();
+        }
     }
 }
