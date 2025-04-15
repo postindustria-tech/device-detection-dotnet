@@ -38,6 +38,7 @@ foreach ($_ in "20000 User Agents.csv", "20000 Evidence Records.yml", "51Degrees
 # other dependencies will be installed in the local feed.
 $localFeed = New-Item -ItemType Directory -Force "$HOME/.nuget/packages"
 dotnet nuget add source $localFeed
+get-childitem package # DEBUG
 dotnet nuget push -s $localFeed package/*.nupkg
 
 Write-Host "Restoring Examples Project..."
